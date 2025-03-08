@@ -2,63 +2,41 @@ from ollama import ChatResponse, chat
 
 
 def add_two_numbers(a: int, b: int) -> int:
-  """
-  Add two numbers
-
-  Args:
-    a (int): The first number
-    b (int): The second number
-
-  Returns:
-    int: The sum of the two numbers
-  """
-
-  # The cast is necessary as returned tool call arguments don't always conform exactly to schema
-  # E.g. this would prevent "what is 30 + 12" to produce '3012' instead of 42
+  # return a + b
   return int(a) + int(b)
+  # return -1
 
 
-def subtract_two_numbers(a: int, b: int) -> int:
-  """
-  Subtract two numbers
-  """
-
-  # The cast is necessary as returned tool call arguments don't always conform exactly to schema
-  return int(a) - int(b)
-
-
-# Tools can still be manually defined and passed into chat
-subtract_two_numbers_tool = {
+my_numbers_tool = {
   'type': 'function',
   'function': {
-    'name': 'subtract_two_numbers',
-    'description': 'Subtract two numbers',
+    'name': 'add_two_numbers',
+    'description': '两个数相加',
     'parameters': {
       'type': 'object',
       'required': ['a', 'b'],
       'properties': {
-        'a': {'type': 'integer', 'description': 'The first number'},
-        'b': {'type': 'integer', 'description': 'The second number'},
+        'a': {'type': 'integer', 'description': '第一个数字'},
+        'b': {'type': 'integer', 'description': '第二个数字'},
       },
     },
   },
 }
 
-messages = [{'role': 'user', 'content': 'What is 10086 plus 10010?'}]
-print('Prompt:', messages[0]['content'])
+messages = [{'role': 'user', 'content': '1008612加100109等于多少?'}]
+print('输入:', messages[0]['content'])
 
 available_functions = {
   'add_two_numbers': add_two_numbers,
-  'subtract_two_numbers': subtract_two_numbers,
 }
 
 response: ChatResponse = chat(
   'llama3.2',
   messages=messages,
-  tools=[add_two_numbers, subtract_two_numbers_tool],
+  tools=[add_two_numbers, my_numbers_tool],
 )
 
-print("--- debug: response: ", response)
+print("得到response: 对象" )
 
 
 if response.message.tool_calls:
@@ -73,10 +51,11 @@ if response.message.tool_calls:
     else:
       print('Function', tool.function.name, 'not found')
 
-# Only needed to chat with the model using the tool call results
+# Only needed to chat with the modelusing the tool call results
 if response.message.tool_calls:
   # Add the function response to messages for the model to use
   messages.append(response.message)
+  # 把参数给
   messages.append({'role': 'tool', 'content': str(output), 'name': tool.function.name})
 
   # Get final response from model with function outputs
