@@ -1,7 +1,7 @@
 from ollama import chat
 from ollama import ChatResponse
 
-response: ChatResponse = chat(model='qwq', messages=[
+response: ChatResponse = chat(model='llama3.2', messages=[
   {
     'role': 'user',
     'content': '天空为什么是蓝色的？',
