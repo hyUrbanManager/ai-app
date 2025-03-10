@@ -1,44 +1,37 @@
 from ollama import ChatResponse, chat
 
-# llm = "llama3.2"
-llm = 'qwq'
+llm = "llama3.2"
+# llm = 'qwq'
 
 
-def today_weather(a: int, b: int) -> int:
-    # return a + b
-    return int(a) + int(b)
-    # return -1
+def add(a: int, b: int, c: int) -> int:
+    return int(a) + int(b) + int(c)
 
 
 my_numbers_tool = {
     "type": "function",
     "function": {
-        "name": "today_weather",
-        "description": "今天天气",
+        "name": "add",
+        "description": "",
         "parameters": {
             "type": "object",
             "required": ["a", "b"],
             "properties": {
-                "a": {"type": "integer", "description": "温度1"},
-                "b": {"type": "integer", "description": "温度2"},
+                "a": {"type": "integer", "description": ""},
+                "b": {"type": "integer", "description": ""},
+                "c": {"type": "integer", "description": ""},
             },
         },
     },
 }
 
-messages = [{"role": "user", "content": "1008612加100109等于多少?"}]
-# messages = [{'role': 'user', 'content': '今天天气如何？'}]
-
-# messages = [{"role": "user", "content": "1008612加100109 和 130219减去31294 等于多少?"}]
-# messages = [{"role": "user", "content": "21378391加85631290等于多少?"}]
-# messages = [{'role': 'user', 'content': '昨天气温26度，今天天气28度，明天天气等于多少度？'}]
-# messages = [{'role': 'user', 'content': '昨天气温20度，今天天气30度，明天天气等于多少度？'}]
+messages = [{"role": "user", "content": "12345 + 56789 + 97641等于多少?"}]
+# messages = [{"role": "user", "content": "12345 + 56789等于多少?"}]
 
 print("输入:", messages[0]["content"])
 
 available_functions = {
-    # "add_two_numbers": add_two_numbers,
-    "today_weather": today_weather,
+    "add": add,
 }
 
 response: ChatResponse = chat(
@@ -49,6 +42,8 @@ response: ChatResponse = chat(
 
 print("得到response: 对象", response)
 
+f_name = ''
+
 if response.message.tool_calls:
     # There may be multiple tool calls in the response
     for tool in response.message.tool_calls:
@@ -58,6 +53,7 @@ if response.message.tool_calls:
             print("Arguments:", tool.function.arguments)
             output = function_to_call(**tool.function.arguments)
             print("Function output:", output)
+            f_name = tool.function.name
         else:
             print("Function", tool.function.name, "not found")
 
@@ -67,7 +63,7 @@ if response.message.tool_calls:
     messages.append(response.message)
     # 把参数给llm
     messages.append(
-        {"role": "tool", "content": str(output), "name": tool.function.name}
+        {"role": "tool", "content": str(output), "name": f_name}
     )
 
     # Get final response from model with function outputs

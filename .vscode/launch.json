@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python 调试程序: 当前文件 mac",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "/Users/hy/ai/venv-ai/bin/python"
+        },
+        {
             "name": "Python 调试程序: 当前文件",
             "type": "debugpy",
             "request": "launch",
