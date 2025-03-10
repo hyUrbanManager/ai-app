@@ -1,7 +1,7 @@
 from ollama import ChatResponse, chat
 
-llm = "llama3.2"
-# llm = 'qwq'
+# llm = "llama3.2"
+llm = 'qwq'
 
 
 def air(value: int) -> int:
