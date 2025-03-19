@@ -1,12 +1,12 @@
 输入: 帮我把风扇调到5档，空调调到29度.
-得到response: 对象 model='llama3.2' created_at='2025-03-19T07:10:32.606616Z' done=True done_reason='stop' total_duration=696237542 load_duration=33352417 prompt_eval_count=208 prompt_eval_duration=113000000 eval_count=32 eval_duration=548000000 message=Message(role='assistant', content='', images=None, tool_calls=[ToolCall(function=Function(name='fan', arguments={'value': 5})), ToolCall(function=Function(name='air', arguments={'value': 29}))])
+得到response: 对象 model='llama3.2' created_at='2025-03-19T07:13:13.592784Z' done=True done_reason='stop' total_duration=1129613334 load_duration=34147334 prompt_eval_count=208 prompt_eval_duration=708000000 eval_count=23 eval_duration=386000000 message=Message(role='assistant', content='', images=None, tool_calls=[ToolCall(function=Function(name='fan', arguments={'value': 5})), ToolCall(function=Function(name='air', arguments={'value': 29}))])
 Calling function: fan
 Arguments: {'value': 5}
------ air函数。value类型： <class 'int'>, 自己执行风扇调到 5 档
+----- fan函数。value类型： <class 'int'>, 自己执行风扇调到 5 档
 Function output: 0
 Calling function: air
 Arguments: {'value': 29}
 ----- air函数。value类型： <class 'int'>, 自己执行空调调到 29 度.
 Function output: 0
 再次问ai。messages [{'role': 'user', 'content': '帮我把风扇调到5档，空调调到29度.'}, Message(role='assistant', content='', images=None, tool_calls=[ToolCall(function=Function(name='fan', arguments={'value': 5})), ToolCall(function=Function(name='air', arguments={'value': 29}))]), {'role': 'tool', 'content': '调节成功', 'name': 'fan'}, {'role': 'tool', 'content': '调节成功', 'name': 'air'}]
-Final response: model='llama3.2' created_at='2025-03-19T07:10:33.372612Z' done=True done_reason='stop' total_duration=761957917 load_duration=10965875 prompt_eval_count=89 prompt_eval_duration=160000000 eval_count=35 eval_duration=589000000 message=Message(role='assistant', content='Here is the revised version:\n\n调节风扇到第 5 转台\n调节空调温度为 29 度\n\nI hope that helps!', images=None, tool_calls=None)
+Final response: model='llama3.2' created_at='2025-03-19T07:13:14.068551Z' done=True done_reason='stop' total_duration=470175083 load_duration=12760000 prompt_eval_count=89 prompt_eval_duration=162000000 eval_count=18 eval_duration=294000000 message=Message(role='assistant', content='*   fans: 5档\n*   air conditioner: 29度', images=None, tool_calls=None)

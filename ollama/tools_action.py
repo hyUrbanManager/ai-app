@@ -8,7 +8,7 @@ def air(value: int) -> int:
     return 0
 
 def fan(value: int) -> int:
-    print("----- air函数。value类型： %s, 自己执行风扇调到 %s 档" % (type(value), value))
+    print("----- fan函数。value类型： %s, 自己执行风扇调到 %s 档" % (type(value), value))
     return 0
 
 air_tool = {
