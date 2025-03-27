@@ -6,8 +6,8 @@ response: ChatResponse = chat(
     messages=[
         {
             "role": "user",
-            "content": "这是什么主板？有几个内存插槽？有多少项供电？适配哪些CPU？有几个sata接口？",
-            "images": ["/Users/hy/Pictures/A520M-A.png"],
+            "content": "这是什么？",
+            "images": ["/Users/hy/Movies/demo.mp4"],
         },
     ],
 )
